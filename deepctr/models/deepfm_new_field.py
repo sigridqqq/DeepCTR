@@ -49,14 +49,13 @@ def DeepFM_new(linear_feature_columns, dnn_feature_columns, fm_group=(DEFAULT_GR
     group_embedding_dict, dense_value_list = input_from_feature_columns(features, dnn_feature_columns, l2_reg_embedding,
                                                                         seed, support_group=True)
 
-    # fm_logit = add_func([FM()(concat_func(v, axis=1))
-    #                      for k, v in group_embedding_dict.items() if k in fm_group])
+    fm_logit = add_func([FM()(concat_func(v, axis=1)) for k, v in group_embedding_dict.items() if k in fm_group])
 
-    fm_input = concat_func(group_embedding_dict, axis=1)
+    # fm_input = concat_func(group_embedding_dict, axis=1)
 
-    fm_logit = add_func([FM()(fm_input)])
+    # fm_logit = add_func([FM()(fm_input)])
 
-    bi_out = BiInteractionPooling()(fm_input)
+    bi_out = BiInteractionPooling()((concat_func(v, axis=1)) for k, v in group_embedding_dict.items() if k in fm_group)
     if bi_dropout:
         bi_out = tf.keras.layers.Dropout(bi_dropout)(bi_out, training=None)
 
@@ -73,3 +72,4 @@ def DeepFM_new(linear_feature_columns, dnn_feature_columns, fm_group=(DEFAULT_GR
     output = PredictionLayer(task)(final_logit)
     model = tf.keras.models.Model(inputs=inputs_list, outputs=output)
     return model
+
