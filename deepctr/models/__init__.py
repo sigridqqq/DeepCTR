@@ -5,6 +5,7 @@ from .dcn import DCN
 from .dcnmix import DCNMix
 from .deepfefm import DeepFEFM
 from .deepfm import DeepFM
+from .deepfm_new_field import DeepFM_new
 from .difm import DIFM
 from .fgcnn import FGCNN
 from .fibinet import FiBiNET
@@ -23,4 +24,4 @@ from .xdeepfm import xDeepFM
 
 __all__ = ["AFM", "CCPM", "DCN", "IFM", "DIFM", "DCNMix", "MLR", "DeepFM", "MLR", "NFM", "DIN", "DIEN", "FNN", "PNN",
            "WDL", "xDeepFM", "AutoInt", "ONN", "FGCNN", "DSIN", "FiBiNET", 'FLEN', "FwFM", "BST", "DeepFEFM",
-           "SharedBottom", "ESMM", "MMOE", "PLE"]
+           "SharedBottom", "ESMM", "MMOE", "PLE", "DeepFM_new"]
